@@ -12,7 +12,7 @@
 	<artifactId>opn-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>opn-service</name>
-	<description>OpnCore Business Services</description>
+	<description>OpnCore Services</description>
 	<url/>
 	<licenses>
 		<license/>
