@@ -1,7 +1,18 @@
+<h1 align="center">
+  <br>
+  <a href=""><img src="/public/apple-touch-icon.png" alt="OpnCore" width="200"></a>
+  <br>
+  OpnCore
+  <br>
+</h1>
+
 # opnCore-service
 Lightweight, high-performance core operations. RESTful API endpoints for easy integration. Built-in support for cloud platforms and containerization. Configurable through environment variables for flexibility. Comprehensive logging and error handling. Prerequisites Before running the service, ensure you have the following installed:
 
-
+<link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
+<link rel="manifest" href="/public/site.webmanifest">
 
 ## Installation
 
@@ -22,4 +33,4 @@ Please make sure to follow TDD practices.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)alicense.com/licenses/mit/)
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)
