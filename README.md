@@ -1,9 +1,8 @@
 <h1 align="center">
   <br>
-  <a href=""><img src="/public/apple-touch-icon.png" alt="OpnCore Services" width="200"></a>
+  <a href=""><img src="/public/apple-touch-icon.png" alt="OpnCore-Services" width="200"></a>
   <br>
-  OpnCore
-  <br>
+  OpnCore Service
 </h1>
 
 Lightweight, high-performance core operations. Built-in support for cloud platforms and containerization. Configurable through environment variables for flexibility. Comprehensive logging and error handling. Prerequisites Before running the service, ensure you have the following installed:
