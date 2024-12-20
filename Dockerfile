@@ -7,7 +7,7 @@ FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /opn-service
 
-COPY target/opn-service-0.0.1-SNAPSHOT.jar app.jar
+COPY target/opn-service-0.0.2-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
