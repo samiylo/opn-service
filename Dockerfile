@@ -5,7 +5,7 @@ ENTRYPOINT ["top", "-b"]
 
 FROM eclipse-temurin:17-jdk-alpine
 
-WORKDIR /app
+WORKDIR /opn-service
 
 COPY target/opn-service-0.0.1-SNAPSHOT.jar app.jar
 
