@@ -28,20 +28,16 @@ public class LoginService {
         keyPairGen.initialize(2048);
         KeyPair keyPair = keyPairGen.generateKeyPair();
 
-        // Convert keys to strings for storage
         String publicKeyString = java.util.Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
         String privateKeyString = java.util.Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded());
 
-        // Store keys in the hash map
         hashMap.put("public", publicKeyString);
         hashMap.put("private", privateKeyString);
 
-        // Return the public key
         return publicKeyString;
     }
 
     public boolean validateKeyPair(String token) throws Exception {
-        // Get keys from the hash map
         String publicKeyString = hashMap.get("public");
         String privateKeyString = hashMap.get("private");
 
@@ -49,7 +45,6 @@ public class LoginService {
             throw new IllegalStateException("Keys are not generated yet.");
         }
 
-        // Decode keys
         byte[] publicKeyBytes;
         byte[] privateKeyBytes;
 
@@ -57,7 +52,15 @@ public class LoginService {
         privateKeyBytes = java.util.Base64.getDecoder().decode(privateKeyString);
 
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PublicKey publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(publicKeyBytes));
+
+        PublicKey publicKey;
+        try {
+            publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(publicKeyBytes));
+        }
+        catch (Exception ex) {
+            System.out.println("Token Format Error ::: " + ex);
+            return false;
+        }
         PrivateKey privateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(privateKeyBytes));
 
         // Validate by signing and verifying a test message

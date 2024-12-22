@@ -18,10 +18,7 @@ public class UserController {
 
     @PostMapping("/validate")
     public Boolean validateWebToken(@RequestHeader("Authorization") String token) throws Exception {
-        if(loginService.validateKeyPair(token)) {
-            return true;
-        }
-        return false;
+        return loginService.validateKeyPair(token);
     }
 
 }
