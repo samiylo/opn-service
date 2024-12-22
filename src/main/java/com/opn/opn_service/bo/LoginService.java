@@ -10,24 +10,17 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 
-import static com.opn.opn_service.config.JWTokenImpl.generateRSAKeyPair;
-
 import java.security.*;
-import java.util.HashMap;
+
+import static com.opn.opn_service.config.JWTokenImpl.generateRSAKeyPair;
 
 @Service
 public class LoginService {
 
-    private static String PRIVATE_KEY;
-
     HashMap<String, String> hashMap = new HashMap<>();
 
-    public String generateRSA() throws Exception {
-        // Generate a new RSA key pair
-        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
-        keyPairGen.initialize(2048);
-        KeyPair keyPair = keyPairGen.generateKeyPair();
-
+    public String getLoginKey() throws Exception {
+        KeyPair keyPair = generateRSAKeyPair();
         String publicKeyString = java.util.Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
         String privateKeyString = java.util.Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded());
 

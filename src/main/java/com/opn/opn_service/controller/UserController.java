@@ -13,7 +13,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String getWebToken() throws Exception {
-        return loginService.generateRSA();
+        return loginService.getLoginKey();
     }
 
     @PostMapping("/validate")
