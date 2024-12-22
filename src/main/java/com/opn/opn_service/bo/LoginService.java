@@ -1,5 +1,7 @@
 package com.opn.opn_service.bo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.security.KeyFactory;
@@ -17,22 +19,24 @@ import static com.opn.opn_service.config.JWTokenImpl.generateRSAKeyPair;
 @Service
 public class LoginService {
 
-    HashMap<String, String> hashMap = new HashMap<>();
+    private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
+
+    HashMap<String, String> securityKeyList = new HashMap<>();
 
     public String getLoginKey() throws Exception {
         KeyPair keyPair = generateRSAKeyPair();
         String publicKeyString = java.util.Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
         String privateKeyString = java.util.Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded());
 
-        hashMap.put("public", publicKeyString);
-        hashMap.put("private", privateKeyString);
+        securityKeyList.put("public", publicKeyString);
+        securityKeyList.put("private", privateKeyString);
 
         return publicKeyString;
     }
 
     public boolean validateKeyPair(String token) throws Exception {
-        String publicKeyString = hashMap.get("public");
-        String privateKeyString = hashMap.get("private");
+        String publicKeyString = securityKeyList.get("public");
+        String privateKeyString = securityKeyList.get("private");
 
         if (publicKeyString == null || privateKeyString == null) {
             throw new IllegalStateException("Keys are not generated yet.");
@@ -51,7 +55,7 @@ public class LoginService {
             publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(publicKeyBytes));
         }
         catch (Exception ex) {
-            System.out.println("Token Format Error ::: " + ex);
+            logger.error(ex.getMessage());
             return false;
         }
         PrivateKey privateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(privateKeyBytes));
@@ -72,6 +76,9 @@ public class LoginService {
         verifier.update(messageBytes);
         boolean isVerified = verifier.verify(signature);
 
+        if(isVerified) {
+            logger.info("Security Key Validated ::: ");
+        }
         return isVerified;
 
     }
